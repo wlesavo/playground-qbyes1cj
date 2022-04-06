@@ -1,7 +1,14 @@
 title: BFS and Voronoi diagrams using bit-shift operations
 plan:
-- title: https://github.com/wlesavo/playground-qbyes1cj.git
-  statement: markdowns/welcome.md
+  - title: Introduction
+    statement: markdowns/intro.md
+  - title: Shortest path in great escape
+    statement: markdowns/great_escape.md
+  - title: Voronoi area in Amazonial
+    statement: markdowns/amazonial.md
+  - title: Voronoi area in Line Racing
+    statement: markdowns/line_racing.md
+    
 projects:
   cpp:
     root: /cpp-project
