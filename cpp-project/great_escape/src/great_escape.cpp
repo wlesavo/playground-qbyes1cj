@@ -49,7 +49,6 @@ class State {
 public:  
   uint128_t con[4] = {};
   int player_pos[3] = {};
-  int vor_score[3] = {};
   State() {};
   void set_wall(int pos, int type){
     if (type == 0){
@@ -73,9 +72,7 @@ class Game {
 public:
 
   State cur_state{};
-  
   uint128_t player_won[3] = {};
-  uint128_t visited = 0;
 
   Game() {
     // activate all connections
@@ -140,8 +137,8 @@ public:
         total_dist += get_path_len(cur_state, 0);
     }
     auto end = high_resolution_clock::now();
-    auto full_count = duration_cast<microseconds>(end - start).count() / 1000.0;
-    cerr << "total execution time " << full_count << " with " << roll_count << " rolls"<<  endl;
+    auto full_count = duration_cast<microseconds>(end - start).count();
+    cerr << "total execution time " << full_count << "ms with " << roll_count << " rolls"<<  endl;
     cerr << "calculated min distance " << total_dist/roll_count << endl;
   }
 };
