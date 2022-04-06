@@ -2,22 +2,11 @@
 #pragma GCC optimize("O3,inline,omit-frame-pointer,unroll-loops","unsafe-math-optimizations","no-trapping-math")
 #pragma GCC option("arch=native","tune=native","no-zero-upper")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,mmx,avx,avx2,popcnt,rdrnd,abm,bmi2,fma")
-
+#ifdef __GNUC__
+#include <cfenv>
+#endif
 #include <iostream>
-#include <string>
-#include <vector>
-#include <array>
-#include <algorithm>
-#include <cmath>
 #include <chrono>
-#include <cstring>
-#include <set>
-#include <map>
-#include <queue>
-#include <cassert>
-#include <memory>
-#include <unordered_set>
-#include <bitset>
 //}
 
 #include <immintrin.h>
@@ -26,16 +15,16 @@ using namespace std;
 using namespace std::chrono;
 #define uint128_t __int128
 
+//{
+    
 const int WIDTH = 9;
 const int HEIGHT = 9;
 const int SIZE = 9 * 9;
 
-//{
 template <class T>
 static inline void set_bit(T& val, int n){
   val |= (T)1 << n;
 }
-
 template <class T>
 static inline void reset_bit(T& val, int n){
   val &= ~((T)1 << n);
@@ -130,15 +119,23 @@ public:
   }
   
   void test() {
+    system("cat /proc/cpuinfo | grep \"model name\" | head -1 >&2");
+    system("cat /proc/cpuinfo | grep \"cpu MHz\" | head -1 >&2");
+
+    ios::sync_with_stdio(false);
+#ifdef __GNUC__
+    feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+#endif
+
     init_cur_state();
     int total_dist = 0;
-    int roll_count = 100000;
+    int roll_count = 1000000;
     auto start = high_resolution_clock::now();
     for (int i = 0; i<roll_count; i++){
         total_dist += get_path_len(cur_state, 0);
     }
     auto end = high_resolution_clock::now();
-    auto full_count = duration_cast<microseconds>(end - start).count();
+    auto full_count = duration_cast<microseconds>(end - start).count()/1000;
     cerr << "total execution time " << full_count << "ms with " << bfs_rolls << " rolls"<<  endl;
     cerr << "calculated min distance " << total_dist/bfs_rolls << endl;
   }
