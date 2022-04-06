@@ -9,12 +9,14 @@ I would also encourage more experienced users to point out to any mistakes I mad
 # Storing connections for a grid
 
 A common way to store a 2-dimensional array is to put in 1-dimensional array performing a simple transformation for coordinates
-@[](int pos = x + y * WIDTH;)
+``` cpp
+int pos = x + y * WIDTH;
+```
 with a back transformation 
-@[](
+``` cpp
 int x = pos%WIDTH;
 int y = pos/WIDTH;
-)
+```
 
 # Example
 
