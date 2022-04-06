@@ -80,7 +80,7 @@ The attentive reader would notice that here BFS misses win condition, so it perf
 
 # Code example
 
-@[Great escape shortest path calculation example]({"stubs": ["great_escape/src/great_escape.cpp"], "command": "sh /project/great_escape/target/run.sh"})
+@[Great escape shortest path calculation example]({"stubs": ["/great_escape/src/great_escape.cpp"], "command": "sh /project/target/run_ge.sh"})
 
 
 
