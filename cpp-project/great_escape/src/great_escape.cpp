@@ -83,18 +83,12 @@ public:
     for (int i = 0; i < 4; i++){
       cur_state.con[i] = ((uint128_t)1 << 81) - (uint128_t)1;
     }
-    
     // remove boundary connections
     for (int i = 0; i < WIDTH; i++) {
       reset_bit(cur_state.con[0], i);
       reset_bit(cur_state.con[1], i * WIDTH + WIDTH - 1);
       reset_bit(cur_state.con[2], i + WIDTH * (HEIGHT - 1));
       reset_bit(cur_state.con[3], i * WIDTH);
-      
-      reset_bit(cur_state.con_grid[i], 0);
-      reset_bit(cur_state.con_grid[i + WIDTH * (HEIGHT - 1)], 2);
-      reset_bit(cur_state.con_grid[i * WIDTH], 3);
-      reset_bit(cur_state.con_grid[i * WIDTH + WIDTH - 1], 1);
     }
     
     // prepare win-condition masks
