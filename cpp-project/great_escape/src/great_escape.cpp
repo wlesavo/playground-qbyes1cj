@@ -73,7 +73,7 @@ public:
 
   State cur_state{};
   uint128_t player_won[3] = {};
-
+  int bfs_rolls = 0;
   Game() {
     // activate all connections
     for (int i = 0; i < 4; i++){
@@ -101,6 +101,7 @@ public:
     if (check_bit(player_won[owner], pos)){
       return 0;
     }
+    bfs_rolls += 1;
     uint128_t win = player_won[owner];
     uint128_t cur = (uint128_t)1<<pos;
     uint128_t visits = cur;
@@ -131,15 +132,15 @@ public:
   void test() {
     init_cur_state();
     int total_dist = 0;
-    int roll_count = 1000000;
+    int roll_count = 100000;
     auto start = high_resolution_clock::now();
     for (int i = 0; i<roll_count; i++){
         total_dist += get_path_len(cur_state, 0);
     }
     auto end = high_resolution_clock::now();
     auto full_count = duration_cast<microseconds>(end - start).count();
-    cerr << "total execution time " << full_count << "ms with " << roll_count << " rolls"<<  endl;
-    cerr << "calculated min distance " << total_dist/roll_count << endl;
+    cerr << "total execution time " << full_count << "ms with " << bfs_rolls << " rolls"<<  endl;
+    cerr << "calculated min distance " << total_dist/bfs_rolls << endl;
   }
 };
 
