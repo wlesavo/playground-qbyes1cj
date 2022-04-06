@@ -1,5 +1,3 @@
-#include "Exercises/Universe.h"
-
 #include <string>
 #include <vector>
 #include <iostream>
