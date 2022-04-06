@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make -O3 && ./great_escape/great_escape
+make && ./great_escape/great_escape
