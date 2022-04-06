@@ -1,8 +1,8 @@
 # Introduction
 
-Looking for ways to speed up some parts of my code I often heard of a mystical "bitshifts" and "bitboards". Although we do have an exclent playground from [MSmits](https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search) and [emh](https://www.codingame.com/playgrounds/58038/fast-connected-components-for-6x12-bitboard), which by the way I higly recommend reading prior to this article since we wont get into the details about the common BFS itself, I found it to not be enough to implement trully fast BFS myself for a different task and for many things I would have to come to mind by myself. 
+Looking for ways to speed up some parts of my code I often heard of a mystical "bitshifts" and "bitboards". Although we do have an excelent playgrounds from [MSmits](https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search) and [emh](https://www.codingame.com/playgrounds/58038/fast-connected-components-for-6x12-bitboard), which by the way I higly recommend reading prior to this article since we wont get into the details about the common BFS itself, I found it not to be enough to implement trully fast BFS myself for a different task and for many things I would have to come to mind by myself. 
 
-So in this playground I will try to demonstrate a simple way to think about BFS using bitboards on example of three different CG games: [Great Escape](https://www.codingame.com/multiplayer/bot-programming/great-escape), [Amazonial](https://www.codingame.com/multiplayer/bot-programming/amazonial) and [Line Racing](https://www.codingame.com/multiplayer/bot-programming/line-racing) going for somewhat different goals but showcasing the same idea. In Great Escape we will find the length of a shortest path, which is a main heuristic in evauation function for this game, in Amazonial and Line Racing we will calculate the voronoi diagramms, which is also the main heuristics for those games while also taking the most of a simulation time to calculate. The difference for a Line Racing is that the board cant be reasonably stored in a single integer value since it has 600 cells and we will come up with a possible workaround for this. 
+So in this playground I will try to demonstrate a simple way to think about BFS using bitboards on example of three different [CG](https://www.codingame.com/) games: [Great Escape](https://www.codingame.com/multiplayer/bot-programming/great-escape), [Amazonial](https://www.codingame.com/multiplayer/bot-programming/amazonial) and [Line Racing](https://www.codingame.com/multiplayer/bot-programming/line-racing) going for somewhat diverse goals but showcasing the same idea. In Great Escape we will find the length of a shortest path, which is a main heuristic in evauation function for this game, in Amazonial and Line Racing we will calculate the voronoi diagramms, which are also the main heuristics for those games being the most time consuming operations in simulation. The difference for a Line Racing is having up to 4 players and the fact that the board cant be reasonably stored in a single integer value since it has 600 cells.
 
 I would also encourage more experienced users to point out to any mistakes I made or a bad practicies I had accidentally used.
 
@@ -26,7 +26,7 @@ int new_y = y - 1;
 // perform all necessary out of bounds checks
 int new_pos = new_x + new_y * WIDTH;
 ```
-But there is an unsafe method to do the same
+But there is also an equivalent unsafe method to do the same
 ``` cpp
 int new_pos = pos - WIDTH;
 ```
@@ -63,7 +63,7 @@ Here 'and' opperation resets all currently stored positions to 0 if the move in 
 
 ``` cpp
 int BFS(const State& s){
-    uint128_t cur = {};
+    uint128_t cur = 0;
     set_bit(cur, s.player_pos);
     uint128_t visits = cur;
     int dist = 0;
