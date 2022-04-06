@@ -100,7 +100,7 @@ public:
   }
   
   int get_path_len(State& s, int owner){
-    int pos = s.players[owner].pos;
+    int pos = s.player_pos[owner];
     if (check_bit(player_won[owner], pos)){
       return 0;
     }
