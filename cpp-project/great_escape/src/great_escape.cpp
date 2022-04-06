@@ -40,6 +40,10 @@ template <class T>
 static inline void reset_bit(T& val, int n){
   val &= ~((T)1 << n);
 }
+template <class T>
+static inline bool check_bit(const T& a, int n){
+  return (a >> n) & 1;
+}
 
 class State {
 public:  
@@ -140,7 +144,7 @@ public:
     int roll_count = 1000000;
     auto start = high_resolution_clock::now();
     for (int i = 0; i<roll_count; i++){
-        total_dist += get_path_len_super_fast(cur_state, 0);
+        total_dist += get_path_len(cur_state, 0);
     }
     auto end = high_resolution_clock::now();
     auto full_count = duration_cast<microseconds>(end - start).count() / 1000.0;
