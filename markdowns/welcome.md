@@ -1,9 +1,10 @@
-# Welcome!
+# Introduction
 
-This C++ template lets you get started quickly with a simple working example using CMake/GCC. If it is your first contribution then you should have a look at the [Getting Started](https://tech.io/doc/getting-started-create-playground) document.
+Looking for ways to speed up some parts of my code I often heard of a mystical "bitshifts" and "bitboards". Although we do have an exclent playground from [MSmits](https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search) and [emh](https://www.codingame.com/playgrounds/58038/fast-connected-components-for-6x12-bitboard), which by the way I higly recommend reading prior to this article, I found it not enough to implement trully fast BFS and for many things I would have to come to mind by myself. 
 
+So in this playground I will try to demonstrate a simple way to think about BFS using bitboards on example of three different CG games: [Great Escape](https://www.codingame.com/multiplayer/bot-programming/great-escape), [Amazonial](https://www.codingame.com/multiplayer/bot-programming/amazonial) and [Line Racing](https://www.codingame.com/multiplayer/bot-programming/line-racing) going for somewhat different goals but showcasing the same idea. In Great Escape we will find the length of a shortest path, which is a main heuristic in evauation function for this game, in Amazonial and Line Racing we will calculate the voronoi diagramms, which is also the main heuristics for those games while also taking taking the most of a simulation time. The difference for a Line Racing is that the board cant be reasonably stored in a single integer value since it has 600 cells and we will come up with a possible workaround for this. 
 
-The source code is on [GitHub](https://github.com/TechDotIO/cpp-template), please feel free to come up with proposals to improve it.
+I would also encourage more experienced users to point out any mistakes or a bad practicies I had accidentally used.
 
 # Hands-on Demo
 

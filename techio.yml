@@ -1,4 +1,4 @@
-title: Path finding and Voronoi diagrams using bit operations
+title: BFS and Voronoi diagrams using bit-shift operations
 plan:
 - title: https://github.com/wlesavo/playground-qbyes1cj.git
   statement: markdowns/welcome.md
