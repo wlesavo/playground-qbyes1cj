@@ -8,7 +8,7 @@ I would also encourage more experienced users to point out to any mistakes I mad
 
 # Storing connections for a grid
 
-A common way to store a 2-dimensional array is to put in 1-dimensional array performing a simple transformation for coordinates
+A common way to store a 2-dimensional array is to put it in 1-dimensional array performing a simple transformation for coordinates
 ``` cpp
 int pos = x + y * WIDTH;
 ```
@@ -17,7 +17,7 @@ with a back transformation
 int x = pos%WIDTH;
 int y = pos/WIDTH;
 ```
-To move pos say UP, we would have to do it the hard way
+To move position say UP, we would have to do it the hard way
 ``` cpp
 int x = pos%WIDTH;
 int y = pos/WIDTH;
@@ -30,10 +30,10 @@ But there is an unsafe method to do the same
 ``` cpp
 int new_pos = pos - WIDTH;
 ```
-This is easy, but we have to make sure that an impossible moves will be rejected.
+This is quite faster, but we have to make sure that an impossible moves will be rejected.
 
 Lets move on. To perform a simple BFS we will store connections for each direction in a single uint128_t value. Set bit for connection would mean that it is possible to walk from current possition to a corresponding direction. 
-```
+``` cpp
 class State{
 public:
     uint128_t con[4] = {};
@@ -51,7 +51,7 @@ static inline void reset_bit(T& val, int n){
   val &= ~((T)1 << n);
 }
 ```
-Preparing the state is described in the executed code example, although during the search we may simply turn on and off the connections needed, so that this connections will always be an an actualized state.
+Preparing the state is described in the executed code example, although during the search we may simply turn on and off the connections needed, so that this connections will always be in an actualized state.
 
 # Performing bit-shift BFS for finding the shortest path length
 
@@ -59,8 +59,7 @@ To perform a BFS we will need a containers to store current positions along with
 ``` cpp
 (cur&con[d])>>WIDTH;
 ```
-Here 'and' opperation resets all currently stored positions to 0 if the move in chosen direction is impossible, making it possible to use the 'unsafe' move, described above. This way moving simultaneously in all directions is possible simply by merging all the moves with 'or'
-for URDL. We also will keep track of all visits to not go back to visited cells.
+Here 'and' opperation resets all currently stored positions to 0 if the move in chosen direction is impossible, making it ready to use the 'unsafe' move, described above. This way moving simultaneously in all directions is performed by simply merging all the moves for URDL with 'or'. We also will have to keep track of all visits to not go back to visited cells. Basically we are done, a simple BFS then will look like this
 
 ``` cpp
 int BFS(const State& s){
@@ -87,6 +86,5 @@ The attentive reader would notice that here BFS misses win condition, so it perf
 
 @[Luke, how many stars are there in these galaxies?]({"stubs": ["src/Exercises/Universe.cpp"],"command": "sh /project/target/run.sh"})
 
-Check out the markdown file [`welcome.md`](https://github.com/TechDotIO/cpp-template/blob/master/markdowns/welcome.md) to see how this exercise is injected into the template.
 
 
