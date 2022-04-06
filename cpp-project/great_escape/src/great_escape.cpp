@@ -52,7 +52,6 @@ public:
   int vor_score[3] = {};
   State() {};
   void set_wall(int pos, int type){
-    set_bit(walls[type], pos);
     if (type == 0){
       reset_bit(con[2], pos);
       reset_bit(con[2], pos+1);
