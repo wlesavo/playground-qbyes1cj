@@ -2,7 +2,7 @@
 
 Lets proceed with an example, but first we need some brief introduction to general movement on grid operations.
 
-# Storing connections for a grid
+# Coordinates and connections on a grid
 
 A common way to store a 2-dimensional array is to put it in 1-dimensional array performing a simple transformation for coordinates
 ``` cpp
