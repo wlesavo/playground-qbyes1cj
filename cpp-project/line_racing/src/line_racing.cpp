@@ -52,11 +52,11 @@ public:
       cur[p].set(s.player_pos[p]);
     }
     voronoi_rolls += 1;
-    bitset<600> visits[4] = {};
-    bitset<600> total{};
+    bitset<600> owned_cells[4] = {};
+    bitset<600> visits{};
     for (int p = 0; p < 4; p++) {
-      visits[p] = cur[p];
-      total |= cur[p];
+      owned_cells[p] = cur[p];
+      visits |= cur[p];
     }
     
     int dist = 0;
@@ -72,7 +72,7 @@ public:
                | (cur[i]&s.con[1])<<1
                | (cur[i]&s.con[2])<<w
                | (cur[i]&s.con[3])>>1;
-        cur[i] &= ~total;
+        cur[i] &= ~visits;
       }
       dist += 1;
       bitset<600> opp_total[4]{};
@@ -87,7 +87,7 @@ public:
       for (int i = 0; i<4; i++){
         if (skip[i])
           continue;
-        visits[i]|=cur[i]&(~opp_total[i]);
+        owned_cells[i]|=cur[i]&(~opp_total[i]);
       }
       bool flag = true;
       for (int i = 0; i<4; i++){
@@ -98,11 +98,11 @@ public:
         break;
       }
       for (int i = 0; i<4; i++){
-        total |= cur[i];
+        visits |= cur[i];
       }
     }
     for (int i = 0; i<4; i++){
-      s.voronoi_score[i] = visits[i].count();
+      s.voronoi_score[i] = owned_cells[i].count();
     }
   }
 
