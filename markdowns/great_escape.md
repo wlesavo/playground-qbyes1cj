@@ -80,6 +80,8 @@ The attentive reader would notice that here BFS misses win condition, so it perf
 
 # Code example
 
+In the executable example the connections preparation and win masks calculation are demonstrated. 
+
 @[Great escape shortest path calculation example]({"stubs": ["/great_escape/src/great_escape.cpp"], "command": "sh /project/target/run_ge.sh"})
 
 

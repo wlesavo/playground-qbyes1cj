@@ -59,5 +59,7 @@ void voronoi(const State& s){
 
 # Code example
 
+In the next example is provided to demonstrate the connections preparation along with some other small details which overall should be pretty clear.
+
 @[Amazonial voronoi calculation]({"stubs": ["amazonial/src/amazonial.cpp"],"command": "sh /project/target/run_amazonial.sh"})
 
