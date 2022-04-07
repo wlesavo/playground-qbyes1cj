@@ -44,76 +44,70 @@ public:
   }
   
   void voronoi(State& s){
-  // set strating positions for both units
-  int players[4] = {};
-  bitset<600> cur[4] = {};
-  for (int p = 0; p < 4; p++) {
-    cur[p].set(s.players_pos[p]);
-    //s.con[d].set(s.players_pos[p] + 1);
-    //s.con[d].set(s.players_pos[p] + WIDTH);
-    //s.con[d].set(s.players_pos[p] - 1);
-    //s.con[d].set(s.players_pos[p] - WIDTH);    
-  }
-  
-  bitset<600> visits[4] = {};
-  bitset<600> total{};
-  for (int p = 0; p < 4; p++) {
-    visits[p] = cur[p];
-    total |= cur[p];
-  }
-
-  int dist = 0;
-  int score = 0;
-  const int w = 30;
-  bool skip[4] = {};
-  //*
-  while (true) {
-    for (int i = 0; i<4; i++){
-      if (skip[i])
-        continue;
-      bitset<600> tmp_res{};
-      tmp_res |= (cur[i]&s.con[0])>>w;
-      tmp_res |= (cur[i]&s.con[1])<<1;
-      tmp_res |= (cur[i]&s.con[2])<<w;
-      tmp_res |= (cur[i]&s.con[3])>>1;
-      cur[i] = tmp_res&(~total);
+    // set strating positions for both units
+    int players[4] = {};
+    bitset<600> cur[4] = {};
+    for (int p = 0; p < 4; p++) {
+      cur[p].set(s.players_pos[p]);
+      //s.con[d].set(s.players_pos[p] + 1);
+      //s.con[d].set(s.players_pos[p] + WIDTH);
+      //s.con[d].set(s.players_pos[p] - 1);
+      //s.con[d].set(s.players_pos[p] - WIDTH);    
     }
-    dist += 1;
-    bitset<600> tmp_total[4]{};
-    for (int i = 0; i<4; i++){
-      if (skip[i])
-        continue;
-      for (int j = 0; j<4; j++){
-        if (i!=j)
-          tmp_total[i] |= cur[j];
+    
+    bitset<600> visits[4] = {};
+    bitset<600> total{};
+    for (int p = 0; p < 4; p++) {
+      visits[p] = cur[p];
+      total |= cur[p];
+    }
+    
+    int dist = 0;
+    int score = 0;
+    const int w = 30;
+    bool skip[4] = {};
+    //*
+    while (true) {
+      for (int i = 0; i<4; i++){
+        if (skip[i])
+          continue;
+        cur[i] = (cur[i]&s.con[0])>>w
+               | (cur[i]&s.con[1])<<1
+               | (cur[i]&s.con[2])<<w;
+               | (cur[i]&s.con[3])>>1;
+        cur[i] &= ~tota);
+      }
+      dist += 1;
+      bitset<600> opp_total[4]{};
+      for (int i = 0; i<4; i++){
+        if (skip[i])
+          continue;
+        for (int j = 0; j<4; j++){
+          if (i!=j)
+            opp_total[i] |= cur[j];
+        }
+      }
+      for (int i = 0; i<4; i++){
+        if (skip[i])
+          continue;
+        visits[i]|=cur[i]&(~opp_total[i]);
+      }
+      bool flag = true;
+      for (int i = 0; i<4; i++){
+        skip[i] = !(cur[i].any());
+        flag = flag && skip[i];
+      }
+      if (flag){
+        break;
+      }
+      for (int i = 0; i<4; i++){
+        total |= cur[i];
       }
     }
     for (int i = 0; i<4; i++){
-      if (skip[i])
-        continue;
-      visits[i]|=cur[i]&(~tmp_total[i]);
-    }      
-    bool flag = true;
-    for (int i = 0; i<p_c; i++){
-      skip[i] = !(cur[i].any());
-      flag = flag && skip[i];
-    }
-    if (flag){
-      break;
-    }
-    for (int i = 0; i<p_c; i++){
-      total |= (cur[i]);
+      voronoi_score[i] = visits[i].count();
     }
   }
-  for (int i = 0; i<p_c; i++){
-    if (vor_dbg){
-      cerr << i << " " << visits[i].count() << endl;
-    }
-    else {
-      visits[i].count();
-    }
-  }
-}
 
   void init_cur_state(){
     //init player position
