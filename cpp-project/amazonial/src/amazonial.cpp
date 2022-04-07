@@ -52,7 +52,7 @@ public:
   Game() {
     // activate all connections
     for (int i = 0; i < 4; i++){
-      cur_state.con[i] = ((uint64_t)1 << 64) - (uint64_t)1;
+      cur_state.con[i] = (uint64_t)(-1);
     }
     // remove boundary connections
     for (int i = 0; i < WIDTH; i++) {
@@ -73,6 +73,8 @@ public:
   
   void voronoi(State& s){
   // set strating positions for both units
+    uint64_t cur1 = 0;
+    uint64_t cur2 = 0;
     for (int i = 0; i<2; i++){
       int pos1 = s.player_pos[0][i];
       set_bit(cur1, pos1);
