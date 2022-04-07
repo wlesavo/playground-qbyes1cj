@@ -85,16 +85,16 @@ public:
     voronoi_rolls += 1;
     
     while (cur1!=0 || cur2 != 0) {
-      cur1 = (cur1 & s.con[0]) >> w | (cur1 & s.con[1]) >> (w - 1) 
-           | (cur1 & s.con[2]) << 1 | (cur1 & s.con[3]) << (w + 1) 
-           | (cur1 & s.con[4]) << w | (cur1 & s.con[5]) << (w - 1) 
-           | (cur1 & s.con[6]) >> 1 | (cur1 & s.con[7]) >> (w + 1);
+      cur1 = (cur1 & s.con[0]) >> WIDTH | (cur1 & s.con[1]) >> (WIDTH - 1) 
+           | (cur1 & s.con[2]) << 1     | (cur1 & s.con[3]) << (WIDTH + 1) 
+           | (cur1 & s.con[4]) << WIDTH | (cur1 & s.con[5]) << (WIDTH - 1) 
+           | (cur1 & s.con[6]) >> 1     | (cur1 & s.con[7]) >> (WIDTH + 1);
       cur1 &= ~visited;
     
-      cur2 = (cur2 & s.con[0]) >> w | (cur2 & s.con[1]) >> (w - 1) 
-           | (cur2 & s.con[2]) << 1 | (cur2 & s.con[3]) << (w + 1) 
-           | (cur2 & s.con[4]) << w | (cur2 & s.con[5]) << (w - 1) 
-           | (cur2 & s.con[6]) >> 1 | (cur2 & s.con[7]) >> (w + 1);
+      cur2 = (cur2 & s.con[0]) >> WIDTH | (cur2 & s.con[1]) >> (WIDTH - 1) 
+           | (cur2 & s.con[2]) << 1     | (cur2 & s.con[3]) << (WIDTH + 1) 
+           | (cur2 & s.con[4]) << WIDTH | (cur2 & s.con[5]) << (WIDTH - 1) 
+           | (cur2 & s.con[6]) >> 1     | (cur2 & s.con[7]) >> (WIDTH + 1);
       cur2 &= ~visited;
       
       my_cells  |= (cur1 & (~cur2));
@@ -129,7 +129,7 @@ public:
     int roll_count = 1000000;
     auto start = high_resolution_clock::now();
     for (int i = 0; i<roll_count; i++){
-        voronoi(cur_state, 0);
+        voronoi(cur_state);
     }
     auto end = high_resolution_clock::now();
     auto full_count = duration_cast<microseconds>(end - start).count()/1000;

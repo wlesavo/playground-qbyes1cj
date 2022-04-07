@@ -34,16 +34,16 @@ void voronoi(const State& s){
   uint64_t opp_cells = cur2;
   uint64_t visited = cur1 | cur2;
   while (cur1!=0 || cur2 != 0) {
-    cur1 = (cur1 & s.con[0]) >> w | (cur1 & s.con[1]) >> (w - 1) 
-         | (cur1 & s.con[2]) << 1 | (cur1 & s.con[3]) << (w + 1) 
-         | (cur1 & s.con[4]) << w | (cur1 & s.con[5]) << (w - 1) 
-         | (cur1 & s.con[6]) >> 1 | (cur1 & s.con[7]) >> (w + 1);
+    cur1 = (cur1 & s.con[0]) >> WIDTH | (cur1 & s.con[1]) >> (WIDTH - 1) 
+         | (cur1 & s.con[2]) << 1     | (cur1 & s.con[3]) << (WIDTH + 1) 
+         | (cur1 & s.con[4]) << WIDTH | (cur1 & s.con[5]) << (WIDTH - 1) 
+         | (cur1 & s.con[6]) >> 1     | (cur1 & s.con[7]) >> (WIDTH + 1);
     cur1 &= ~visited;
   
-    cur2 = (cur2 & s.con[0]) >> w | (cur2 & s.con[1]) >> (w - 1) 
-         | (cur2 & s.con[2]) << 1 | (cur2 & s.con[3]) << (w + 1) 
-         | (cur2 & s.con[4]) << w | (cur2 & s.con[5]) << (w - 1) 
-         | (cur2 & s.con[6]) >> 1 | (cur2 & s.con[7]) >> (w + 1);
+    cur2 = (cur2 & s.con[0]) >> WIDTH | (cur2 & s.con[1]) >> (WIDTH - 1) 
+         | (cur2 & s.con[2]) << 1     | (cur2 & s.con[3]) << (WIDTH + 1) 
+         | (cur2 & s.con[4]) << WIDTH | (cur2 & s.con[5]) << (WIDTH - 1) 
+         | (cur2 & s.con[6]) >> 1     | (cur2 & s.con[7]) >> (WIDTH + 1);
     cur2 &= ~visited;
     
     my_cells  |= (cur1 & (~cur2));
