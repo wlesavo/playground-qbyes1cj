@@ -45,14 +45,9 @@ public:
   
   void voronoi(State& s){
     // set strating positions for both units
-    int players[4] = {};
     bitset<600> cur[4] = {};
     for (int p = 0; p < 4; p++) {
-      cur[p].set(s.players_pos[p]);
-      //s.con[d].set(s.players_pos[p] + 1);
-      //s.con[d].set(s.players_pos[p] + WIDTH);
-      //s.con[d].set(s.players_pos[p] - 1);
-      //s.con[d].set(s.players_pos[p] - WIDTH);    
+      cur[p].set(s.player_pos[p]);
     }
     
     bitset<600> visits[4] = {};
@@ -105,7 +100,7 @@ public:
       }
     }
     for (int i = 0; i<4; i++){
-      voronoi_score[i] = visits[i].count();
+      s.voronoi_score[i] = visits[i].count();
     }
   }
 
