@@ -36,11 +36,13 @@ public:
     }
     // remove boundary connections
     for (int i = 0; i < WIDTH; i++) {
-      cur_state.con[0].set(i);
-      cur_state.con[1].set(i * WIDTH + WIDTH - 1);
-      cur_state.con[2].set(i + WIDTH * (HEIGHT - 1));    
-      cur_state.con[3].set(i * WIDTH);
-    }    
+      cur_state.con[0].reset(i);
+      cur_state.con[2].reset(i + WIDTH * (HEIGHT - 1));
+    }
+    for (int i = 0; i < HEIGHT; i++) {
+      cur_state.con[1].reset(i * WIDTH + WIDTH - 1);
+      cur_state.con[3].reset(i * WIDTH);
+    }
   }
   
   void voronoi(State& s){
@@ -49,7 +51,7 @@ public:
     for (int p = 0; p < 4; p++) {
       cur[p].set(s.player_pos[p]);
     }
-    
+    voronoi_rolls += 1;
     bitset<600> visits[4] = {};
     bitset<600> total{};
     for (int p = 0; p < 4; p++) {
@@ -108,8 +110,8 @@ public:
     //init player position
     cur_state.player_pos[0] = 1 + 5 * WIDTH;
     cur_state.player_pos[1] = 10 + 15 * WIDTH;
-    cur_state.player_pos[2] = 4 + 24 * WIDTH;
-    cur_state.player_pos[3] = 12 + 27 * WIDTH;
+    cur_state.player_pos[2] = 4 + 14 * WIDTH;
+    cur_state.player_pos[3] = 23 + 17 * WIDTH;
     
   }
   
@@ -124,15 +126,18 @@ public:
 
     init_cur_state();
     int total_dist = 0;
-    int roll_count = 1000000;
+    int roll_count = 5000;
     auto start = high_resolution_clock::now();
     for (int i = 0; i<roll_count; i++){
         voronoi(cur_state);
     }
     auto end = high_resolution_clock::now();
     auto full_count = duration_cast<microseconds>(end - start).count()/1000;
-    cerr << "total execution time " << full_count << "ms with " << voronoi_rolls << " rolls"<<  endl;
-    cerr << "calculated voronoi score player 1: " << cur_state.voronoi_score[0] << " player 2: " << cur_state.voronoi_score[1] << endl;
+    cerr << "total execution time " << full_count << "ms with " << voronoi_rolls << " rolls" <<  endl;
+    cerr << "calculated voronoi score player 1: " << cur_state.voronoi_score[0] 
+         << " player 2: " << cur_state.voronoi_score[1]
+         << " player 3: " << cur_state.voronoi_score[2]
+         << " player 4: " << cur_state.voronoi_score[3] << endl;
   }
 };
 
