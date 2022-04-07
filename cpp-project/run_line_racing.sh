@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make && ./great_escape/great_escape
+make && ./run_line_racing/run_line_racing
