@@ -1,13 +1,14 @@
 # Amazonial
-As was previously said, we will now try to apply similar concept to solve a quite different task. Namely we will calculate the number of cells one player can reach faster than another and vise versa, which is a special case of [Voronoi diagrams] (https://www.codingame.com/playgrounds/243/voronoi-diagrams/fortunes-algorithm) calculated on a grid.
+As was previously said, we will now try to apply similar concept to solve a quite different task. Namely we will calculate the number of cells one player can reach faster than another and vise versa, which is a special case of [Voronoi diagrams](https://www.codingame.com/playgrounds/243/voronoi-diagrams/fortunes-algorithm) calculated on a grid.
 
 # General idea
-The game Amazonial is not that different from great escape if you look on it at the right angle. Although it still requires quite a few modifications, i.e accounting for multiple units and 8 available dirrections. The later will lead to a modification of our BFS as
+The game Amazonial is not that different from the Great Escape if you look at it at the right angle. Although it still requires quite a few modifications, i.e accounting for multiple units and 8 available dirrections. The later will lead to a modification of our BFS as
+
 ``` cpp
-cur = (cur & con[0]) >> w | (cur & con[1]) >> (w - 1) 
-     | (cur & con[2]) << 1 | (cur & con[3]) << (w + 1) 
-     | (cur & con[4]) << w | (cur & con[5]) << (w - 1) 
-     | (cur & con[6]) >> 1 | (cur & con[7]) >> (w + 1);
+cur = (cur & con[0]) >> WIDTH | (cur & con[1]) >> (WIDTH - 1) 
+    | (cur & con[2]) << 1     | (cur & con[3]) << (WIDTH + 1) 
+    | (cur & con[4]) << WIDTH | (cur & con[5]) << (WIDTH - 1) 
+    | (cur & con[6]) >> 1     | (cur & con[7]) >> (WIDTH + 1);
 ```
 
 The rest is simple. We first calculate new positions on a current depth for both players, by expanding current cells and substracting all the cells already visited by any player. Then the cells that only one player reached on a current depth are added to the positions that has been won. Then we finally update visited cells. After the BFSs for both players are finished, we calculate the area by counting set bits with a simple recursive function.
@@ -58,7 +59,5 @@ void voronoi(const State& s){
 
 # Code example
 
-@[Luke, how many stars are there in these galaxies?]({"stubs": ["amazonial/src/amazonial.cpp"],"command": "sh /project/target/run_amazonial.sh"})
-
-
+@[Amazonial voronoi calculation]({"stubs": ["amazonial/src/amazonial.cpp"],"command": "sh /project/target/run_amazonial.sh"})
 
