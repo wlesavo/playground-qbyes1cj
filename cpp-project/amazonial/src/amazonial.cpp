@@ -20,7 +20,7 @@ static int count_set_bits(T n)
   if (n == 0)
     return 0;
   else
-    return (n & 1) + countSetBits(n >> 1);
+    return (n & 1) + count_set_bits(n >> 1);
 }
 template <class T>
 static inline void set_bit(T& val, int n){
