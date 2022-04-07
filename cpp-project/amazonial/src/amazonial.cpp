@@ -104,7 +104,7 @@ public:
     
       visited |= cur1 | cur2;
     }
-    s.voronoi_score[0] = count_set_bits(my_cells)
+    s.voronoi_score[0] = count_set_bits(my_cells);
     s.voronoi_score[1] = count_set_bits(opp_cells);
 }
 
