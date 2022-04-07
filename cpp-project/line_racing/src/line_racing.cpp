@@ -73,9 +73,9 @@ public:
           continue;
         cur[i] = (cur[i]&s.con[0])>>w
                | (cur[i]&s.con[1])<<1
-               | (cur[i]&s.con[2])<<w;
+               | (cur[i]&s.con[2])<<w
                | (cur[i]&s.con[3])>>1;
-        cur[i] &= ~tota);
+        cur[i] &= ~total;
       }
       dist += 1;
       bitset<600> opp_total[4]{};
