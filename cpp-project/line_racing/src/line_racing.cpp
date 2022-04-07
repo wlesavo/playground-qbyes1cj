@@ -47,13 +47,13 @@ public:
   
   void voronoi(State& s){
     // set strating positions for both units
-    bitset<600> cur[4] = {};
+    bitset<SIZE> cur[4] = {};
     for (int p = 0; p < 4; p++) {
       cur[p].set(s.player_pos[p]);
     }
     voronoi_rolls += 1;
-    bitset<600> owned_cells[4] = {};
-    bitset<600> visits{};
+    bitset<SIZE> owned_cells[4] = {};
+    bitset<SIZE> visits{};
     for (int p = 0; p < 4; p++) {
       owned_cells[p] = cur[p];
       visits |= cur[p];
@@ -75,7 +75,7 @@ public:
         cur[i] &= ~visits;
       }
       dist += 1;
-      bitset<600> opp_total[4]{};
+      bitset<SIZE> opp_total[4]{};
       for (int i = 0; i<4; i++){
         if (skip[i])
           continue;
