@@ -48,8 +48,6 @@ public:
   int players[4] = {};
   bitset<600> cur[4] = {};
   for (int p = 0; p < 4; p++) {
-    int x = s.players[p].head % WIDTH;
-    int y = s.players[p].head / WIDTH;
     cur[p].set(s.players_pos[p]);
     //s.con[d].set(s.players_pos[p] + 1);
     //s.con[d].set(s.players_pos[p] + WIDTH);
